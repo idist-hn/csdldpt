@@ -1,14 +1,11 @@
 import shutil
 
 from grayscale import grayScale
-from gaussFilter import gaussFilter
+from utils.gaussFilter import gaussFilter
 from reason_growing import regionGrowing
 from split import split
-from countPixel import countPixel
+from utils.countPixel import countPixel
 import os
-import re
-import numpy as np
-from scipy.spatial import distance
 
 # Define parameters
 image_path = f'./init-sources'
@@ -41,10 +38,15 @@ for file in files:
     gaussFilter(f'{file_path}', f'{gauss_file}')
     print('gaussFilter done')
 
+    # convert gray level
     gray_file = process_path + "/" + filename + "/gray.jpg"
     grayScale(f'{gauss_file}', f'{gray_file}')
     print('grayScale done')
 
+    # get min, max gray level
+
+
+    # region growing
     region_growing_file = process_path + "/" + filename + "/regionGrowing.jpg"
     regionGrowing(f'{gray_file}', f'{region_growing_file}', grid)
     print('regionGrowing done')
