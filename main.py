@@ -12,13 +12,15 @@ image_path = f'./init-sources'
 process_path = f'./processed-data'
 databases_path = f'./databases'
 grid = 4
+thresh=10
 
 # Reset processed-data folder
-shutil.rmtree(f'./{process_path}')
-shutil.rmtree(f'./{databases_path}')
+shutil.rmtree(f'./{process_path}', True)
+shutil.rmtree(f'./{databases_path}', True)
 os.makedirs(f'./{databases_path}', 0o777, True)
 
 files = os.listdir(f'{image_path}')
+files.sort()
 DB = open(f"./databases/vectorData.txt", "a")
 
 for file in files:
@@ -43,12 +45,14 @@ for file in files:
     grayScale(f'{gauss_file}', f'{gray_file}')
     print('grayScale done')
 
+    # Histogram
+
     # get min, max gray level
 
 
     # region growing
     region_growing_file = process_path + "/" + filename + "/regionGrowing.jpg"
-    regionGrowing(f'{gray_file}', f'{region_growing_file}', grid)
+    regionGrowing(f'{gray_file}', f'{region_growing_file}', grid, thresh)
     print('regionGrowing done')
 
     pixel = countPixel(f'{region_growing_file}')
@@ -102,6 +106,4 @@ DB.close()
 #         # print(line)
 # # for i in range(0, euclidDistance.len(), 1):
 #     # find min and images
-#
-#
 #

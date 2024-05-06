@@ -43,7 +43,7 @@ def selectConnects():
 # Định nghĩa hàm regionGrow để thực hiện nở vùng
 def regionGrow(img, seeds, thresh):  # img: ảnh; seeds: danh sách điểm hạt giống; thresh: ngưỡng
     m, n = img.shape
-    level = 256
+    level = 255
     seedMark = np.zeros([m, n])  # Tạo mảng để đánh dấu các điểm hạt gống,
     # Tức là, mảng này chứa ảnh ảnh và có các điểm hạt giống
     seedList = []  # Tạo danh sách chứa điểm hạt giống
