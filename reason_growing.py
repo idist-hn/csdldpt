@@ -78,7 +78,7 @@ def regionGrow(img, seeds, thresh):  # img: ảnh; seeds: danh sách điểm h�
     return seedMark
 
 
-def regionGrowing(resource_file, destination_file, grid, thresh=10):
+def regionGrowing(file_name, resource_file, destination_file, grid, thresh=10):
     # Đọc ảnh
     img = cv2.imread(resource_file, 0)
     # img = cv2.imread(str(i) + '.jpg',0)
@@ -95,4 +95,5 @@ def regionGrowing(resource_file, destination_file, grid, thresh=10):
 
     # Test hệ số thresh
     os.makedirs(f'./regionGrowing/', 0o777, True)
-    cv2.imwrite(f'./regionGrowing/{now}.jpg', img_result)
+
+    cv2.imwrite(f'./regionGrowing/{file_name}.jpg', img_result)
