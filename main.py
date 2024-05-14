@@ -1,11 +1,4 @@
 import shutil
-import threading
-
-from grayscale import grayScale
-from utils.gaussFilter import gaussFilter
-from reason_growing import regionGrowing
-from split import split
-from utils.countPixel import countPixel
 import os
 
 from utils.threads import processImage
@@ -28,7 +21,6 @@ files.sort()
 
 for file in files:
     DB = open(f"./databases/vectorData.txt", "a")
-    # thread = threading.Thread(target=processImage, args=(file, exclude, image_path, process_path, grid, thresh, DB))
     thread = processImage(file, exclude, image_path, process_path, grid, thresh, DB)
     DB.close()
 
@@ -36,8 +28,7 @@ for file in files:
 
 
 
-# testVector= [0.123, 112, 1, 1, 330, 1, 1, 0, 0, 1, 1, 19834, 0, 1, 1, 1, 1]
-#
+
 # with open(f"{ROOT_DIR}/vectorData.txt", 'r') as f:
 #     while True:
 #         line = f.readline()

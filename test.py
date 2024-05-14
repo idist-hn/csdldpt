@@ -3,8 +3,8 @@ import numpy as np
 from matplotlib import pyplot as plt
 
 # Load and blur image
-img = cv.imread('./Images/2.jpg')
-img2 = cv.imread('./Images/2.jpg')
+img = cv.imread('./dataset/1002.jpg')
+img2 = cv.imread('./dataset/1001.jpg')
 blur = cv.GaussianBlur(img,(5,5),0)
 blur2 = cv.GaussianBlur(img2,(5,5),0)
 

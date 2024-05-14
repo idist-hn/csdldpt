@@ -1,8 +1,8 @@
 import os
 
-from grayscale import grayScale
-from reason_growing import regionGrowing
-from split import split
+from utils.grayscale import grayScale
+from utils.reason_growing import regionGrowing
+from utils.split import split
 from utils.countPixel import countPixel
 from utils.gaussFilter import gaussFilter
 
@@ -14,7 +14,7 @@ def processImage(file, exclude, image_path, process_path, grid, thresh, DB):
     file_path = image_path + "/" + file
     filename = file.split('.')[0]
     os.makedirs(f'{process_path}/{filename}', 0o777, True)
-    record = open(f"./{process_path}/{filename}/record.txt", "a")
+    record = open(f"./{process_path}/{filename}/record.txt", "w")
 
     # Define parameters
     vector = []
@@ -76,7 +76,7 @@ def processImage(file, exclude, image_path, process_path, grid, thresh, DB):
         else:
             vector.append(0)
 
-    record.write(f'{vector}\n')
+    record.write(f'{vector}')
     record.close()
 
     DB.write(f'{file} has {vector}\n')

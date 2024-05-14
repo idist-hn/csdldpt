@@ -94,6 +94,6 @@ def regionGrowing(file_name, resource_file, destination_file, grid, thresh=10):
     now = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
     # Test hệ số thresh
-    os.makedirs(f'./regionGrowing/', 0o777, True)
+    os.makedirs(f'../regionGrowing/', 0o777, True)
 
     cv2.imwrite(f'./regionGrowing/{file_name}.jpg', img_result)
