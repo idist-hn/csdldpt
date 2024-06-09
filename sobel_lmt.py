@@ -1,8 +1,8 @@
 import cv2
 import numpy as np
 
-for i in range(1, 10):
-    img = cv2.imread(str(i) + '.jpg')
+for i in range(1002, 1008):
+    img = cv2.imread('./dataset/'+ str(i) + '.jpg')
     img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY).astype(float)
 
     Edge_x = cv2.Sobel(img, cv2.CV_64F, 1, 0, ksize=3)

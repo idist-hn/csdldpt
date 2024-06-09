@@ -1,7 +1,7 @@
 import numpy as np
 import cv2 as cv
 from matplotlib import pyplot as plt
-img = cv.imread('./venv/Images/image1.jpg',0)
+img = cv.imread('./dataset/1002.jpg',0)
 # Output dtype = cv.CV_8U
 sobelx8u = cv.Sobel(img,cv.CV_8U,1,0,ksize=5)
 # Output dtype = cv.CV_64F. Then take its absolute and convert to cv.CV_8U

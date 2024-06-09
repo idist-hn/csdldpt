@@ -1,6 +1,7 @@
 import os
 
 from utils.grayscale import grayScale
+from utils.histogram import histogramProcess
 from utils.reason_growing import regionGrowing
 from utils.split import split
 from utils.countPixel import countPixel
@@ -8,8 +9,7 @@ from utils.gaussFilter import gaussFilter
 
 
 def processImage(file, exclude, image_path, process_path, grid, thresh, DB):
-    if file in exclude:
-        return
+
     print("Processing: " + image_path + "/" + file)
     file_path = image_path + "/" + file
     filename = file.split('.')[0]
@@ -30,7 +30,9 @@ def processImage(file, exclude, image_path, process_path, grid, thresh, DB):
     print(filename + ' grayScale done')
 
     # Histogram
-
+    histogram_file = process_path + "/" + filename + "/histogram.jpg"
+    histogramProcess(f'{gauss_file}', f'{histogram_file}')
+    print(filename + ' Histogram done')
     # get min, max gray level
 
 
