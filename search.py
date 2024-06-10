@@ -23,9 +23,10 @@ class ImageCompare():  # leave this empty
     def __init__(self):  # constructor function using self
         self.Filename = ""  # variable using self.
         self.Distance = 9999999  # variable using self
+        self.DistanceHistogram = 9999999  # variable using self
 
     def str(self):
-        return f'{self.Filename} => {self.Distance}'
+        return f'{self.Filename} => euclid: {self.Distance}, histogram: {self.DistanceHistogram}'
 
 
 # Parse Params/Options from commandline
@@ -54,6 +55,7 @@ searchVector.close()
 
 # Read result
 result = open(f"./databases/vectorSearch.txt", "r")
+searchVectorHistogram = open(f"./search-sources/{filename}/histogram.jpg_vector.txt", "r")
 with result as record:
     while True:
         searchRecord = record.readline()
@@ -76,11 +78,15 @@ with DB as row:
         fileScan = line.split('has')[0].strip()
         line = line.split('has')[1].strip()
         vectorImg = re.findall(r"[-+]?(?:\d*\.\d+|\d+)", line)
+        # imageFile = re.findall(r".+\.jpg", line)
+        # print(f'Processing: {imageFile}')
         x = np.array(vectorImg)
         savedVector = x.astype(np.float64)
         dis = distance.euclidean(savedVector, searchVector)
+        disHistogram = distance.euclidean(savedVector, searchVector)
         imageCompare = ImageCompare()
         imageCompare.Distance = round(dis, 3)
+        imageCompare.DistanceHistogram = round(disHistogram, 3)
         imageCompare.Filename = fileScan
 
         if imageCompare.Distance > sameThresh:
@@ -90,6 +96,9 @@ DB.close()
 
 # Find 3 min distance image
 euclidDistances.sort(key=lambda x: x.Distance, reverse=False)
+
+# xoá các phần tử có giá trị Distance = 0
+euclidDistances = [x for x in euclidDistances if x.Distance != 0]
 
 imgSource = cv.imread(f'{file_path}/{file}')
 plt.subplot(221), plt.imshow(imgSource), plt.title(f'Image Search')
